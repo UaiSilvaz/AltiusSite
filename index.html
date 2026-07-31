@@ -1,0 +1,458 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b1728">
+  <meta name="description" content="Altius Engenharia & Energia — energia solar, soluções elétricas e manutenção profissional em Fernandópolis e região.">
+  <meta property="og:title" content="Altius Engenharia & Energia">
+  <meta property="og:description" content="Soluções em energia solar e elétrica para residências, empresas e propriedades rurais.">
+  <meta property="og:image" content="assets/images/hero-poster.jpg">
+  <meta property="og:type" content="website">
+  <title>Altius Engenharia & Energia</title>
+  <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <div class="noise" aria-hidden="true"></div>
+
+  <header class="site-header" id="siteHeader">
+    <a class="brand" href="#inicio" aria-label="Altius - início">
+      <img src="assets/images/logo.svg" alt="Altius Engenharia & Energia">
+    </a>
+
+    <nav class="desktop-nav" aria-label="Navegação principal">
+      <a href="#sobre">A Altius</a>
+      <a href="#solucoes">Soluções</a>
+      <a href="#projetos">Projetos</a>
+      <a href="#simulador">Simulador</a>
+      <a href="#contato">Contato</a>
+    </nav>
+
+    <a class="header-cta magnetic" href="#contato" data-magnetic>
+      <span>Solicitar orçamento</span>
+      <span aria-hidden="true">↗</span>
+    </a>
+
+    <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu" aria-expanded="false">
+      <span></span><span></span>
+    </button>
+  </header>
+
+  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <nav>
+      <a href="#sobre"><span>01</span>A Altius</a>
+      <a href="#solucoes"><span>02</span>Soluções</a>
+      <a href="#projetos"><span>03</span>Projetos</a>
+      <a href="#simulador"><span>04</span>Simulador</a>
+      <a href="#contato"><span>05</span>Contato</a>
+    </nav>
+    <a class="mobile-instagram" href="https://www.instagram.com/altius_energia/" target="_blank" rel="noopener">@altius_energia ↗</a>
+  </div>
+
+  <main>
+    <section class="hero" id="inicio">
+      <video class="hero__video" autoplay muted loop playsinline preload="metadata" poster="assets/images/hero-poster.jpg" aria-hidden="true">
+        <source src="assets/video/hero-solar.mp4" type="video/mp4">
+      </video>
+      <div class="hero__overlay"></div>
+      <div class="hero__grid" aria-hidden="true"></div>
+      <div class="hero__glow" aria-hidden="true"></div>
+
+      <div class="hero__content container">
+
+        <h1 class="hero__title" aria-label="Energia inteligente para ir mais alto">
+          <span class="title-line"><span>Energia solar e</span></span>
+          <span class="title-line title-line--accent"><span>soluções elétricas com confiança.</span></span>
+        </h1>
+
+        <p class="hero__text reveal-hero">
+          Atendimento técnico para residências, empresas e propriedades rurais, com foco em economia, segurança, desempenho e acompanhamento próximo em cada etapa.
+        </p>
+
+        <div class="hero__actions reveal-hero">
+          <a class="btn btn--primary magnetic" href="#simulador" data-magnetic>
+            Simular minha economia
+            <span class="btn__icon">↗</span>
+          </a>
+          <a class="btn btn--ghost" href="#solucoes">
+            Conhecer soluções
+            <span class="btn__icon">↓</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="hero__bottom container reveal-hero">
+        <div class="hero__location">
+          <span>Atendimento</span>
+          <strong>Fernandópolis e região</strong>
+        </div>
+        <div class="hero__mini-stats">
+          <div><strong data-counter="100">0</strong><span>% projeto sob medida</span></div>
+          <div><strong data-counter="25">0</strong><span>anos de vida útil*</span></div>
+        </div>
+        <a href="#sobre" class="scroll-cue" aria-label="Rolar para próxima seção">
+          <span>Role para explorar</span>
+          <i></i>
+        </a>
+      </div>
+    </section>
+
+    <section class="ticker" aria-label="Principais serviços">
+      <div class="ticker__track">
+        <span>ENERGIA SOLAR</span><i>✦</i>
+        <span>PROJETOS ELÉTRICOS</span><i>✦</i>
+        <span>MANUTENÇÃO</span><i>✦</i>
+        <span>EFICIÊNCIA ENERGÉTICA</span><i>✦</i>
+        <span>ENERGIA SOLAR</span><i>✦</i>
+        <span>PROJETOS ELÉTRICOS</span><i>✦</i>
+        <span>MANUTENÇÃO</span><i>✦</i>
+        <span>EFICIÊNCIA ENERGÉTICA</span><i>✦</i>
+      </div>
+    </section>
+
+    <section class="about section" id="sobre">
+      <div class="container about__grid">
+        <div class="section-kicker reveal">01 — A Altius</div>
+        <div class="about__headline">
+          <h2 class="section-title split-text">Engenharia que transforma energia em resultado.</h2>
+        </div>
+        <div class="about__copy reveal">
+          <p>
+            A Altius une engenharia, tecnologia e atendimento próximo para desenvolver soluções energéticas seguras, eficientes e preparadas para o futuro.
+          </p>
+          <p>
+            Cada projeto nasce de uma análise real do consumo, da estrutura e dos objetivos do cliente — sem soluções genéricas.
+          </p>
+          <a href="#contato" class="text-link">Falar com um especialista <span>↗</span></a>
+        </div>
+
+        <div class="about__visual reveal">
+          <img src="assets/images/sobre-instalacao.webp" alt="Equipe realizando instalação de painéis solares em telhado" loading="lazy" decoding="async">
+          <div class="about__badge about__badge--top">Instalação profissional</div>
+          <div class="about__badge about__badge--bottom">
+            <strong>Energia solar</strong>
+            <span>Projeto, instalação e manutenção</span>
+          </div>
+        </div>
+
+        <div class="about__numbers">
+          <article class="number-card reveal">
+            <span class="number-card__index">01</span>
+            <strong>Diagnóstico técnico</strong>
+            <p>Levantamento do consumo, estrutura e potencial de geração.</p>
+          </article>
+          <article class="number-card reveal">
+            <span class="number-card__index">02</span>
+            <strong>Projeto personalizado</strong>
+            <p>Dimensionamento inteligente para desempenho e segurança.</p>
+          </article>
+          <article class="number-card reveal">
+            <span class="number-card__index">03</span>
+            <strong>Execução acompanhada</strong>
+            <p>Instalação organizada, homologação e suporte próximo.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="solutions section" id="solucoes">
+      <div class="container">
+        <div class="section-heading">
+          <div>
+            <div class="section-kicker reveal">02 — Soluções</div>
+            <h2 class="section-title split-text">Uma solução para cada forma de consumir energia.</h2>
+          </div>
+          <p class="section-intro reveal">Da geração solar aos projetos elétricos, cuidamos de cada etapa com visão técnica e foco em retorno.</p>
+        </div>
+
+        <div class="solutions__list">
+          <article class="solution-card solution-card--featured reveal" data-tilt>
+            <div class="solution-card__top">
+              <span class="solution-card__number">01</span>
+              <span class="solution-card__tag">Mais procurado</span>
+            </div>
+            <div class="solution-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 64 64" fill="none"><circle cx="46" cy="16" r="8" stroke="currentColor" stroke-width="2"/><path d="m8 49 10-24h30l8 24H8Z" stroke="currentColor" stroke-width="2"/><path d="M14 39h38M24 25l-4 24M38 25l5 24" stroke="currentColor" stroke-width="2"/></svg>
+            </div>
+            <h3>Energia solar fotovoltaica</h3>
+            <p>Projetos residenciais, comerciais e rurais dimensionados para reduzir custos e aumentar sua autonomia.</p>
+            <ul>
+              <li>Estudo de viabilidade</li>
+              <li>Projeto e homologação</li>
+              <li>Instalação e monitoramento</li>
+            </ul>
+            <a href="#contato" class="solution-card__link">Quero energia solar <span>↗</span></a>
+          </article>
+
+          <article class="solution-card reveal" data-tilt>
+            <div class="solution-card__top"><span class="solution-card__number">02</span></div>
+            <div class="solution-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 64 64" fill="none"><path d="M35 6 17 35h14l-2 23 18-31H34l1-21Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+            </div>
+            <h3>Projetos e instalações elétricas</h3>
+            <p>Soluções elétricas para obras, ampliações e adequações com segurança, organização e conformidade.</p>
+            <ul>
+              <li>Residencial e comercial</li>
+              <li>Quadros e circuitos</li>
+              <li>Adequações e laudos</li>
+            </ul>
+            <a href="#contato" class="solution-card__link">Solicitar avaliação <span>↗</span></a>
+          </article>
+
+          <article class="solution-card reveal" data-tilt>
+            <div class="solution-card__top"><span class="solution-card__number">03</span></div>
+            <div class="solution-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 64 64" fill="none"><path d="M32 9v10M32 45v10M9 32h10M45 32h10M16 16l7 7M41 41l7 7M48 16l-7 7M23 41l-7 7" stroke="currentColor" stroke-width="2"/><circle cx="32" cy="32" r="11" stroke="currentColor" stroke-width="2"/></svg>
+            </div>
+            <h3>Manutenção e eficiência</h3>
+            <p>Inspeção, limpeza técnica e otimização para manter seu sistema seguro e gerando o máximo possível.</p>
+            <ul>
+              <li>Manutenção preventiva</li>
+              <li>Análise de desempenho</li>
+              <li>Correções e melhorias</li>
+            </ul>
+            <a href="#contato" class="solution-card__link">Agendar manutenção <span>↗</span></a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="process section">
+      <div class="container process__grid">
+        <div class="process__sticky">
+          <div class="section-kicker reveal">03 — Como funciona</div>
+          <h2 class="section-title split-text">Do primeiro contato à energia gerada.</h2>
+          <p class="section-intro reveal">Um processo transparente, técnico e acompanhado de ponta a ponta.</p>
+        </div>
+        <div class="process__steps">
+          <article class="process-step reveal">
+            <span>01</span>
+            <div><h3>Conversa e diagnóstico</h3><p>Entendemos sua necessidade, analisamos a conta de energia e levantamos as condições do local.</p></div>
+          </article>
+          <article class="process-step reveal">
+            <span>02</span>
+            <div><h3>Estudo e proposta</h3><p>Apresentamos a solução ideal, estimativa de geração, economia e prazo de retorno.</p></div>
+          </article>
+          <article class="process-step reveal">
+            <span>03</span>
+            <div><h3>Projeto e aprovação</h3><p>Desenvolvemos o projeto técnico e conduzimos a documentação necessária junto à concessionária.</p></div>
+          </article>
+          <article class="process-step reveal">
+            <span>04</span>
+            <div><h3>Instalação e ativação</h3><p>Executamos a instalação, os testes, a configuração do monitoramento e a entrega técnica.</p></div>
+          </article>
+          <article class="process-step reveal">
+            <span>05</span>
+            <div><h3>Acompanhamento</h3><p>Você acompanha a geração e conta com suporte para manter o desempenho do sistema.</p></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="projects section" id="projetos">
+      <div class="container">
+        <div class="section-heading">
+          <div>
+            <div class="section-kicker reveal">04 — Instalações</div>
+            <h2 class="section-title split-text">Projetos reais, execução profissional.</h2>
+          </div>
+          <p class="section-intro reveal">Veja alguns cenários típicos de instalação e atendimento da Altius em campo.</p>
+        </div>
+
+        <div class="projects__grid">
+          <article class="project-card project-card--large reveal">
+            <img src="assets/images/projeto-residencial.webp" alt="Instalação residencial de painéis solares em telhado" loading="lazy" decoding="async">
+            <div class="project-card__overlay"></div>
+            <div class="project-card__content"><span>Residencial</span><h3>Economia e valorização para o seu imóvel.</h3><a href="#contato" aria-label="Ver solução residencial">↗</a></div>
+          </article>
+          <article class="project-card reveal">
+            <img src="assets/images/projeto-comercial.webp" alt="Instalação de sistema fotovoltaico em grande cobertura" loading="lazy" decoding="async">
+            <div class="project-card__overlay"></div>
+            <div class="project-card__content"><span>Comercial</span><h3>Mais previsibilidade e eficiência para o negócio.</h3><a href="#contato" aria-label="Ver solução comercial">↗</a></div>
+          </article>
+          <article class="project-card reveal">
+            <img src="assets/images/projeto-manutencao.webp" alt="Técnico realizando manutenção em sistema solar" loading="lazy" decoding="async">
+            <div class="project-card__overlay"></div>
+            <div class="project-card__content"><span>Manutenção</span><h3>Desempenho, inspeção e suporte técnico contínuo.</h3><a href="#contato" aria-label="Ver solução de manutenção">↗</a></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="simulator section" id="simulador">
+      <div class="container simulator__grid">
+        <div class="simulator__content">
+          <div class="section-kicker reveal">05 — Simulador</div>
+          <h2 class="section-title split-text">Descubra o potencial da sua economia.</h2>
+          <p class="section-intro reveal">Faça uma estimativa rápida. O cálculo final depende de uma análise técnica do local e do histórico de consumo.</p>
+          <div class="simulator__benefits reveal">
+            <div><span>✓</span> Resultado instantâneo</div>
+            <div><span>✓</span> Sem compromisso</div>
+            <div><span>✓</span> Proposta personalizada</div>
+          </div>
+        </div>
+
+        <div class="calculator reveal" id="solarCalculator">
+          <div class="calculator__header">
+            <span>SIMULAÇÃO INICIAL</span>
+            <i></i>
+          </div>
+          <div class="calculator__field">
+            <label for="billRange">Qual o valor médio da sua conta?</label>
+            <div class="calculator__value"><small>R$</small><strong id="billValue">650</strong><small>/mês</small></div>
+            <input type="range" id="billRange" min="200" max="5000" step="50" value="650">
+            <div class="range-labels"><span>R$ 200</span><span>R$ 5.000+</span></div>
+          </div>
+
+          <div class="calculator__field">
+            <label>Tipo de imóvel</label>
+            <div class="property-options" role="radiogroup" aria-label="Tipo de imóvel">
+              <button type="button" class="property-option active" data-type="residencial" role="radio" aria-checked="true">Residencial</button>
+              <button type="button" class="property-option" data-type="comercial" role="radio" aria-checked="false">Comercial</button>
+              <button type="button" class="property-option" data-type="rural" role="radio" aria-checked="false">Rural</button>
+            </div>
+          </div>
+
+          <div class="calculator__results">
+            <div><span>Economia estimada/ano</span><strong id="annualSavings">R$ 6.630</strong></div>
+            <div><span>Potência aproximada</span><strong id="systemSize">5,2 kWp</strong></div>
+            <div><span>Painéis estimados</span><strong id="panelCount">10–12</strong></div>
+          </div>
+
+          <a href="#contato" class="btn btn--primary calculator__cta">Receber análise completa <span class="btn__icon">↗</span></a>
+          <p class="calculator__disclaimer">*Estimativa ilustrativa. Tarifas, incidência solar, sombreamento, disponibilidade de área e perfil de consumo alteram o resultado.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="why section">
+      <div class="container">
+        <div class="why__panel reveal">
+          <div class="why__glow"></div>
+          <div class="why__title">
+            <span>POR QUE ALTIUS</span>
+            <h2>Mais do que instalar.<br>Projetar para durar.</h2>
+          </div>
+          <div class="why__items">
+            <article><span>01</span><h3>Visão técnica</h3><p>Decisões baseadas em cálculo, segurança e desempenho.</p></article>
+            <article><span>02</span><h3>Transparência</h3><p>Proposta clara, acompanhamento e orientação em cada etapa.</p></article>
+            <article><span>03</span><h3>Pós-venda</h3><p>Suporte para você acompanhar e preservar seu investimento.</p></article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="faq section" id="faq">
+      <div class="container faq__grid">
+        <div>
+          <div class="section-kicker reveal">06 — Dúvidas frequentes</div>
+          <h2 class="section-title split-text">Energia solar sem complicação.</h2>
+        </div>
+        <div class="faq__list">
+          <article class="faq-item reveal">
+            <button aria-expanded="false"><span>Quanto posso economizar com energia solar?</span><i></i></button>
+            <div class="faq-answer"><p>A economia varia conforme consumo, tarifa, localização, área disponível e dimensionamento. Um estudo técnico mostra a projeção adequada para cada imóvel.</p></div>
+          </article>
+          <article class="faq-item reveal">
+            <button aria-expanded="false"><span>O sistema funciona em dias nublados?</span><i></i></button>
+            <div class="faq-answer"><p>Sim. Os módulos continuam gerando energia com radiação difusa, embora a produção possa ser menor do que em dias de céu aberto.</p></div>
+          </article>
+          <article class="faq-item reveal">
+            <button aria-expanded="false"><span>Preciso trocar toda a instalação elétrica?</span><i></i></button>
+            <div class="faq-answer"><p>Nem sempre. A instalação é avaliada antes do projeto. Quando necessário, são indicadas adequações para garantir segurança e funcionamento correto.</p></div>
+          </article>
+          <article class="faq-item reveal">
+            <button aria-expanded="false"><span>A Altius cuida da homologação?</span><i></i></button>
+            <div class="faq-answer"><p>Sim. O serviço pode incluir projeto, documentação, solicitação de acesso, acompanhamento e ativação junto à concessionária.</p></div>
+          </article>
+          <article class="faq-item reveal">
+            <button aria-expanded="false"><span>O sistema precisa de manutenção?</span><i></i></button>
+            <div class="faq-answer"><p>É recomendável realizar inspeções e limpeza conforme as condições do local. Isso ajuda a preservar segurança e desempenho ao longo do tempo.</p></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact section" id="contato">
+      <div class="contact__bg" aria-hidden="true"></div>
+      <div class="container contact__grid">
+        <div class="contact__content">
+          <div class="section-kicker reveal">07 — Vamos conversar</div>
+          <h2 class="contact__title split-text">Seu próximo passo começa com uma boa análise.</h2>
+          <p class="reveal">Conte um pouco sobre o que você precisa. A mensagem será preparada para você enviar diretamente à equipe Altius.</p>
+          <div class="contact__social reveal">
+            <span>Acompanhe</span>
+            <a href="https://www.instagram.com/altius_energia/" target="_blank" rel="noopener">Instagram @altius_energia ↗</a>
+          </div>
+        </div>
+
+        <form class="contact-form reveal" id="contactForm">
+          <div class="form-row">
+            <label><span>Seu nome</span><input type="text" name="name" placeholder="Como podemos te chamar?" required></label>
+            <label><span>Telefone</span><input type="tel" name="phone" placeholder="(17) 99999-9999" required></label>
+          </div>
+          <div class="form-row">
+            <label><span>Cidade</span><input type="text" name="city" placeholder="Sua cidade" required></label>
+            <label><span>Interesse</span>
+              <select name="interest" required>
+                <option value="">Selecione</option>
+                <option>Energia solar residencial</option>
+                <option>Energia solar comercial</option>
+                <option>Energia solar rural</option>
+                <option>Projeto ou instalação elétrica</option>
+                <option>Manutenção do sistema solar</option>
+                <option>Outro serviço</option>
+              </select>
+            </label>
+          </div>
+          <label><span>Conte brevemente o que precisa</span><textarea name="message" rows="4" placeholder="Ex.: minha conta média é de R$ 700 e quero uma simulação..."></textarea></label>
+          <button type="submit" class="btn btn--primary form-submit">
+            <span>Preparar mensagem</span><span class="btn__icon">↗</span>
+          </button>
+          <div class="form-feedback" id="formFeedback" role="status"></div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer__top">
+      <a href="#inicio" class="footer__brand"><img src="assets/images/logo.svg" alt="Altius Engenharia & Energia"></a>
+      <div class="footer__nav">
+        <div><span>Navegação</span><a href="#sobre">A Altius</a><a href="#solucoes">Soluções</a><a href="#projetos">Projetos</a><a href="#contato">Contato</a></div>
+        <div><span>Soluções</span><a href="#solucoes">Energia solar</a><a href="#solucoes">Projetos elétricos</a><a href="#solucoes">Manutenção</a><a href="#simulador">Simulador</a></div>
+        <div><span>Contato</span><a href="https://www.instagram.com/altius_energia/" target="_blank" rel="noopener">Instagram ↗</a><p>Fernandópolis e região</p></div>
+      </div>
+    </div>
+    <div class="container footer__bottom">
+      <p>© <span id="currentYear"></span> Altius Engenharia & Energia. Todos os direitos reservados.</p>
+      <a href="#inicio">Voltar ao topo ↑</a>
+    </div>
+  </footer>
+
+  <div class="copy-toast" id="copyToast">Mensagem copiada. Abrindo o Instagram…</div>
+
+  <a class="whatsapp-float" id="whatsappFloat" href="https://wa.me/?text=Ol%C3%A1%2C%20equipe%20Altius!%20Gostaria%20de%20solicitar%20um%20or%C3%A7amento." target="_blank" rel="noopener" aria-label="Falar com a Altius pelo WhatsApp">
+    <span class="whatsapp-float__message" aria-hidden="true">
+      <strong>Olá! 👋</strong>
+      <small>Como podemos ajudar?</small>
+    </span>
+    <span class="whatsapp-float__button">
+      <span class="whatsapp-float__badge" aria-hidden="true">1</span>
+      <svg viewBox="0 0 32 32" aria-hidden="true">
+        <path fill="currentColor" d="M16.04 3A12.9 12.9 0 0 0 5.1 22.75L3.26 29l6.4-1.68A12.98 12.98 0 1 0 16.04 3Zm0 23.56c-2.08 0-4.11-.56-5.88-1.62l-.42-.25-3.8 1 1.02-3.7-.27-.43a10.65 10.65 0 1 1 9.35 5Zm5.84-7.98c-.32-.16-1.9-.94-2.2-1.04-.29-.1-.5-.16-.72.16-.21.32-.82 1.04-1 1.25-.19.21-.38.24-.7.08-.32-.16-1.35-.5-2.58-1.6a9.66 9.66 0 0 1-1.78-2.2c-.19-.32-.02-.5.14-.66.15-.14.32-.37.48-.56.16-.18.21-.32.32-.53.1-.21.05-.4-.03-.56-.08-.16-.72-1.73-.98-2.37-.26-.62-.52-.54-.72-.55h-.61c-.22 0-.56.08-.86.4-.3.32-1.13 1.1-1.13 2.69 0 1.58 1.16 3.11 1.32 3.32.16.21 2.27 3.47 5.5 4.87.77.33 1.37.53 1.84.68.77.24 1.47.21 2.03.13.62-.1 1.9-.78 2.17-1.53.27-.75.27-1.4.19-1.53-.08-.13-.3-.21-.62-.37Z"/>
+      </svg>
+    </span>
+  </a>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
