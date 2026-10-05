@@ -1,158 +1,144 @@
 (() => {
   'use strict';
-
   const $ = (selector, context = document) => context.querySelector(selector);
   const $$ = (selector, context = document) => [...context.querySelectorAll(selector)];
-  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const prefersReducedMotion = motionPreference.matches;
+  const mobileViewport = window.matchMedia('(max-width: 900px)');
+  const header = $('#siteHeader');
+  const menuToggle = $('#menuToggle');
+  const mobileMenu = $('#mobileMenu');
+  const dock = $('.mobile-dock');
+  let menuScrollY = 0;
 
-  // Initial state
-  window.addEventListener('load', () => {
-    document.body.classList.add('is-loaded');
-    if (window.gsap && !prefersReducedMotion) initHeroAnimation();
-  });
-
-  // Smooth scroll
-  let lenis = null;
-  if (window.Lenis && !prefersReducedMotion && window.innerWidth > 991) {
-    lenis = new Lenis({ duration: 1.05, smoothWheel: true, wheelMultiplier: 0.9 });
-    const raf = (time) => { lenis.raf(time); requestAnimationFrame(raf); };
-    requestAnimationFrame(raf);
-  }
-
+  // Native scrolling keeps touch momentum and anchor navigation in one system.
   $$('a[href^="#"]').forEach((link) => {
     link.addEventListener('click', (event) => {
-      const target = $(link.getAttribute('href'));
+      const id = link.getAttribute('href').slice(1);
+      const target = document.getElementById(id);
       if (!target) return;
       event.preventDefault();
       closeMobileMenu();
-      if (lenis) lenis.scrollTo(target, { offset: -72 });
-      else target.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth' });
+      target.scrollIntoView({ behavior: motionPreference.matches ? 'instant' : 'smooth', block: 'start' });
+      history.replaceState(null, '', `#${id}`);
     });
   });
 
-  // Header behavior
-  const header = $('#siteHeader');
-  let lastScroll = window.scrollY;
-  const updateHeader = () => {
-    const y = window.scrollY;
-    header?.classList.toggle('scrolled', y > 30);
-    header?.classList.toggle('header-hidden', y > lastScroll && y > 500);
-    lastScroll = y;
-  };
+  const updateHeader = () => header?.classList.toggle('scrolled', window.scrollY > 24);
   window.addEventListener('scroll', updateHeader, { passive: true });
   updateHeader();
 
-  // Mobile menu
-  const menuToggle = $('#menuToggle');
-  const mobileMenu = $('#mobileMenu');
   function openMobileMenu() {
-    menuToggle?.classList.add('active');
-    menuToggle?.setAttribute('aria-expanded', 'true');
-    mobileMenu?.classList.add('active');
-    mobileMenu?.setAttribute('aria-hidden', 'false');
+    menuScrollY = window.scrollY;
+    mobileMenu.inert = false;
+    mobileMenu.setAttribute('aria-hidden', 'false');
+    mobileMenu.classList.add('active');
+    menuToggle.classList.add('active');
+    menuToggle.setAttribute('aria-expanded', 'true');
+    menuToggle.setAttribute('aria-label', 'Fechar menu');
     document.body.classList.add('menu-open');
+    document.body.style.top = `-${menuScrollY}px`;
+    $('main').inert = true;
+    $('.site-footer').inert = true;
+    if (dock) dock.inert = true;
   }
   function closeMobileMenu() {
-    menuToggle?.classList.remove('active');
-    menuToggle?.setAttribute('aria-expanded', 'false');
-    mobileMenu?.classList.remove('active');
-    mobileMenu?.setAttribute('aria-hidden', 'true');
+    if (!mobileMenu.classList.contains('active')) return;
+    mobileMenu.classList.remove('active');
+    mobileMenu.inert = true;
+    mobileMenu.setAttribute('aria-hidden', 'true');
+    menuToggle.classList.remove('active');
+    menuToggle.setAttribute('aria-expanded', 'false');
+    menuToggle.setAttribute('aria-label', 'Abrir menu');
     document.body.classList.remove('menu-open');
+    document.body.style.top = '';
+    $('main').inert = false;
+    $('.site-footer').inert = false;
+    if (dock) dock.inert = false;
+    window.scrollTo({ top: menuScrollY, behavior: 'instant' });
+    menuToggle.focus({ preventScroll: true });
   }
-  menuToggle?.addEventListener('click', () => mobileMenu?.classList.contains('active') ? closeMobileMenu() : openMobileMenu());
+  menuToggle?.addEventListener('click', () => mobileMenu.classList.contains('active') ? closeMobileMenu() : openMobileMenu());
+  document.addEventListener('keydown', (event) => {
+    if (!mobileMenu.classList.contains('active')) return;
+    if (event.key === 'Escape') { closeMobileMenu(); return; }
+    if (event.key !== 'Tab') return;
+    const focusable = [menuToggle, ...$$('a', mobileMenu)];
+    const index = focusable.indexOf(document.activeElement);
+    if (event.shiftKey && index <= 0) { event.preventDefault(); focusable.at(-1).focus(); }
+    else if (!event.shiftKey && (index === focusable.length - 1 || index < 0)) { event.preventDefault(); menuToggle.focus(); }
+  });
+  mobileViewport.addEventListener('change', () => { if (!mobileViewport.matches) closeMobileMenu(); });
 
-  function initHeroAnimation() {
-    if (!window.gsap) return;
-    const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
-    tl.from('.title-line > span', { yPercent: 110, duration: 1.05, stagger: 0.12 })
-      .from('.hero__text', { y: 20, opacity: 0, duration: 0.75 }, '-=0.55')
-      .from('.hero__actions', { y: 20, opacity: 0, duration: 0.75 }, '-=0.5')
-      .from('.hero__bottom', { y: 18, opacity: 0, duration: 0.7 }, '-=0.4');
+  // One-time, compositor-friendly entry animations. Content stays visible if JS fails.
+  const runningAnimations = new Set();
+  if (!prefersReducedMotion && 'IntersectionObserver' in window) {
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(({ isIntersecting, target }) => {
+        if (!isIntersecting) return;
+        observer.unobserve(target);
+        if (motionPreference.matches || !target.animate) return;
+        const animation = target.animate([
+          { opacity: 0.55, transform: 'translateY(14px)' },
+          { opacity: 1, transform: 'translateY(0)' }
+        ], { duration: 420, easing: 'cubic-bezier(.2,.7,.2,1)' });
+        runningAnimations.add(animation);
+        animation.finished.finally(() => runningAnimations.delete(animation)).catch(() => {});
+      });
+    }, { threshold: 0.06 });
+    $$('.reveal, .split-text').forEach(element => revealObserver.observe(element));
+  }
+  motionPreference.addEventListener('change', () => {
+    if (motionPreference.matches) runningAnimations.forEach(animation => animation.cancel());
+    syncVideo();
+  });
+
+  // Only load the decorative video on larger screens; pause outside the viewport.
+  const video = $('.hero__video');
+  let heroVisible = true;
+  function syncVideo() {
+    const allowed = !mobileViewport.matches && !motionPreference.matches && !navigator.connection?.saveData;
+    if (!allowed || !heroVisible || document.hidden) { video?.pause(); return; }
+    const source = $('source', video);
+    if (!source.hasAttribute('src')) { source.src = source.dataset.src; video.load(); }
+    video.play().catch(() => {});
+  }
+  if (video) {
+    new IntersectionObserver(([entry]) => { heroVisible = entry.isIntersecting; syncVideo(); }).observe($('#inicio'));
+    mobileViewport.addEventListener('change', syncVideo);
+    document.addEventListener('visibilitychange', syncVideo);
+    syncVideo();
   }
 
-  // GSAP scroll animation with IntersectionObserver fallback
-  if (window.gsap && window.ScrollTrigger && !prefersReducedMotion) {
-    gsap.registerPlugin(ScrollTrigger);
-
-    $$('.reveal').forEach((element) => {
-      gsap.fromTo(element, { y: 48, opacity: 0 }, {
-        y: 0, opacity: 1, duration: 0.95, ease: 'power3.out',
-        scrollTrigger: { trigger: element, start: 'top 88%', once: true }
-      });
-    });
-
-    $$('.split-text').forEach((element) => {
-      gsap.fromTo(element, { y: 38, opacity: 0 }, {
-        y: 0, opacity: 1, duration: 1.05, ease: 'power3.out',
-        scrollTrigger: { trigger: element, start: 'top 86%', once: true }
-      });
-    });
-
-    gsap.to('.hero__video', {
-      scale: 1.05, yPercent: 4, ease: 'none',
-      scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true }
-    });
-
-    gsap.to('.hero__glow', {
-      xPercent: 25, yPercent: 20, ease: 'none',
-      scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 1 }
-    });
-
-    $$('.project-card img').forEach((img) => {
-      gsap.fromTo(img, { scale: 1.12 }, {
-        scale: 1, ease: 'none',
-        scrollTrigger: { trigger: img.closest('.project-card'), start: 'top bottom', end: 'bottom top', scrub: true }
-      });
-    });
-  } else {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => entry.isIntersecting && entry.target.classList.add('visible'));
-    }, { threshold: 0.12 });
-    $$('.reveal, .split-text').forEach((element) => observer.observe(element));
+  // Touch-friendly services rail, with equivalent button and keyboard controls.
+  const track = $('#solutionsTrack');
+  const cards = $$('.solution-card', track);
+  const prev = $('#servicePrev');
+  const next = $('#serviceNext');
+  const position = $('#servicePosition');
+  let activeService = 0;
+  function updateServicePosition() {
+    const left = track.getBoundingClientRect().left;
+    activeService = cards.reduce((best, card, index) =>
+      Math.abs(card.getBoundingClientRect().left - left) < Math.abs(cards[best].getBoundingClientRect().left - left) ? index : best, 0);
+    position.textContent = `${String(activeService + 1).padStart(2, '0')} / ${String(cards.length).padStart(2, '0')}`;
+    prev.disabled = activeService === 0;
+    next.disabled = activeService === cards.length - 1;
   }
-
-  // Animated counters
-  const counterObserver = new IntersectionObserver((entries, observer) => {
-    entries.forEach((entry) => {
-      if (!entry.isIntersecting) return;
-      const element = entry.target;
-      const target = Number(element.dataset.counter || 0);
-      const duration = 1100;
-      const start = performance.now();
-      const step = (now) => {
-        const progress = Math.min((now - start) / duration, 1);
-        const eased = 1 - Math.pow(1 - progress, 3);
-        element.textContent = Math.round(target * eased);
-        if (progress < 1) requestAnimationFrame(step);
-      };
-      requestAnimationFrame(step);
-      observer.unobserve(element);
-    });
-  }, { threshold: 0.7 });
-  $$('[data-counter]').forEach((counter) => counterObserver.observe(counter));
-
-  // Magnetic buttons
-  if (!prefersReducedMotion && window.matchMedia('(pointer: fine)').matches && window.innerWidth > 991) {
-    $$('[data-magnetic]').forEach((element) => {
-      element.addEventListener('mousemove', (event) => {
-        const rect = element.getBoundingClientRect();
-        const x = event.clientX - rect.left - rect.width / 2;
-        const y = event.clientY - rect.top - rect.height / 2;
-        element.style.transform = `translate(${x * 0.14}px, ${y * 0.14}px)`;
-      });
-      element.addEventListener('mouseleave', () => element.style.transform = 'translate(0, 0)');
-    });
-
-    $$('[data-tilt]').forEach((card) => {
-      card.addEventListener('mousemove', (event) => {
-        const rect = card.getBoundingClientRect();
-        const x = (event.clientX - rect.left) / rect.width - 0.5;
-        const y = (event.clientY - rect.top) / rect.height - 0.5;
-        card.style.transform = `perspective(900px) rotateX(${-y * 4}deg) rotateY(${x * 4}deg) translateY(-4px)`;
-      });
-      card.addEventListener('mouseleave', () => card.style.transform = '');
-    });
+  function moveService(direction) {
+    const card = cards[Math.max(0, Math.min(cards.length - 1, activeService + direction))];
+    const left = card.getBoundingClientRect().left - track.getBoundingClientRect().left + track.scrollLeft;
+    track.scrollTo({ left, behavior: motionPreference.matches ? 'instant' : 'smooth' });
   }
+  prev.addEventListener('click', () => moveService(-1));
+  next.addEventListener('click', () => moveService(1));
+  track.addEventListener('scroll', updateServicePosition, { passive: true });
+  track.addEventListener('keydown', event => {
+    if (event.target !== track || !mobileViewport.matches) return;
+    if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') { event.preventDefault(); moveService(event.key === 'ArrowRight' ? 1 : -1); }
+  });
+  window.addEventListener('resize', updateServicePosition, { passive: true });
+  updateServicePosition();
 
   // Solar calculator
   const billRange = $('#billRange');
@@ -230,7 +216,11 @@
     ].join('\n');
 
     const config = window.ALTIUS_CONFIG || {};
-    const whatsapp = String(config.whatsappNumber || '').replace(/\D/g, '');
+    const supportInterests = ['Monitoramento ou reconexão de inversor', 'Manutenção e suporte técnico'];
+    const contactNumber = supportInterests.includes(data.get('interest'))
+      ? config.supportWhatsappNumber
+      : config.whatsappNumber;
+    const whatsapp = String(contactNumber || config.whatsappNumber || '').replace(/\D/g, '');
     if (whatsapp.length >= 12) {
       window.open(`https://wa.me/${whatsapp}?text=${encodeURIComponent(message)}`, '_blank', 'noopener');
       if (formFeedback) formFeedback.textContent = 'Abrindo o WhatsApp para concluir o contato…';
